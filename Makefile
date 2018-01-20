@@ -14,14 +14,18 @@
 
 # Defining variables
 
-NAME = libft.a
+NAME = fsabatie.filler
+LIB_NAME = libft.a
 SRC_PATH = libft
+FILL_PATH = srcs
 OBJ_PATH = obj
 
-PRINTF_SRC =
+FILL_SRC =	filler.c \
+			play.c
 
 SRC_NAME =	ft_strjoin_char.c \
 			ft_strjoinfree.c \
+			get_next_line.c \
 			ft_putendl_fd.c \
 			spec_handlers.c \
 			ft_putchar_fd.c \
@@ -33,6 +37,7 @@ SRC_NAME =	ft_strjoin_char.c \
 			ft_memalloc.c \
 			ft_striteri.c \
 			ft_strsplit.c \
+			ft_retsplit.c \
 			ft_putwchar.c \
 			ft_wstrnsub.c \
 			nb_printers.c \
@@ -104,22 +109,28 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 _SRC = $(addprefix ../,$(SRC))
 
-CPPFLAGS = -Wall -Wextra -Werror
+FILL_OBJ_NAME = $(FILL_SRC:.c=.o)
+FILL_OBJ = $(addprefix $(OBJ_PATH)/,$(FILL_OBJ_NAME))
+FILLER_SRC = $(addprefix $(FILL_PATH)/,$(FILL_SRC))
+_FILL_SRC = $(addprefix ../,$(FILLER_SRC))
+
+
+CPPFLAGS = -Wall -Wextra -Werror -g
 all: $(NAME)
 
 $(NAME):
 	@mkdir obj && cd obj && gcc $(CPPFLAGS) -c $(_SRC)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	@ar rc $(LIB_NAME) $(OBJ)
+	@ranlib $(LIB_NAME)
+	@cd obj && gcc $(CPPFLAGS) -c $(_FILL_SRC)
+	@gcc $(CPPFLAGS) -o $(NAME) $(FILL_OBJ) $(LIB_NAME)
+	@mv $(NAME) players/
+	@rm -rf $(LIB_NAME)
 
 clean:
 	@rm -rf $(OBJ_PATH)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf players/$(NAME)
 
 re: fclean all
-
-lik: re
-	@gcc -Wall -Wextra -Werror ormain.c libftprintf.a -o printf
-	@make fclean

@@ -12,25 +12,50 @@
 
 #ifndef FILLER_H
 # define FILLER_H
-
 # include "../libft/libft.h"
+# include <stdlib.h>
+# define MARK 0;
+# define L_MARK 1;
+
+typedef enum	e_player
+{
+	P1 = 1,
+	P2 = 2
+}				t_player;
 
 typedef enum	e_dir
 {
+	UP,
+	DOWN,
 	LEFT,
 	RIGHT
-}				e_dir;
+}				t_dir;
+
+typedef struct	s_piece
+{
+	size_t		piece_x;
+	size_t		piece_y;
+}				t_piece;
 
 typedef struct	s_opponent
 {
 	size_t		op_last_x;
 	size_t		op_last_y;
-	e_dir		last_dir;
-	e_dir		avg_dir;
+	t_dir		last_dir;
+	t_dir		avg_dir;
 }				t_op;
+
+typedef struct	s_champ
+{
+	t_player	player;
+	char		*mark;
+}				t_champ;
 
 typedef struct	s_filler
 {
+	t_champ		*me;
+	t_op		*op;
+	t_piece		*cur_piece;
 	size_t		map_x;
 	size_t		map_y;
 	float		aim_left;
@@ -39,11 +64,6 @@ typedef struct	s_filler
 	float		center_y;
 }				t_filler;
 
-typedef struct	s_piece
-{
-	size_t		piece_x;
-	size_t		piece_y;
-}				t_piece;
-
+void	play(t_filler *f);
 
 #endif

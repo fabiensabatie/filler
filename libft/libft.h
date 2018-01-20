@@ -16,6 +16,7 @@
 # include <wchar.h>
 # include <stdarg.h>
 # include <inttypes.h>
+# define BUFF_SIZE 10000
 # define BEFORE 0
 # define AFTER 1
 # define DIGITS 0
@@ -33,6 +34,10 @@
 # define CR			"\x1b[39m"
 # define BLINKON	"\x1b[5m"
 # define BLINKOFF	"\x1b[25m"
+
+/*
+** PRINTF
+*/
 
 typedef enum	e_bool
 {
@@ -94,6 +99,16 @@ void				handle_str(t_print *s);
 void				handle_zero(t_print *s);
 void				handle_special(t_print *s);
 void				handle_bonus(t_print *s);
+
+/*
+** GET_NEXT_LINE
+*/
+
+int					get_next_line(const int fd, char **line);
+
+/*
+** LIBFT
+*/
 
 typedef struct		s_list
 {
@@ -161,6 +176,7 @@ char				*ft_strnsub(char const *s, int n);
 char				ft_chrstr(char *hay, char *needle);
 char				*ft_strcsub(char const *s, char c);
 char				**ft_strsplit(char const *s, char c);
+char				*ft_retsplit(char *str, char c, int n);
 char				*ft_strstr(char *haystack, char *needle);
 char				*ft_strjoin_char(char const *s1, char c);
 char				*ft_strncat(char *s1, char *s2, size_t n);

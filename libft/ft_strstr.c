@@ -19,17 +19,21 @@ char	*ft_strstr(char *haystack, char *needle)
 	size_t counter;
 	size_t i;
 
-	needle_size = (size_t)ft_strlen(needle);
 	i = 0;
+	if (needle)
+		needle_size = (size_t)ft_strlen(needle);
+	else
+		return (NULL);
 	if (*needle == '\0')
 		return (haystack);
-	while (haystack[i])
-	{
-		counter = 0;
-		while (needle[counter] == haystack[i++])
-			if (++counter == needle_size)
-				return (&haystack[i - counter]);
-		i -= counter;
-	}
+	else if (needle_size)
+		while (haystack[i])
+		{
+			counter = 0;
+			while (needle[counter] == haystack[i++])
+				if (++counter == needle_size)
+					return (&haystack[i - counter]);
+			i -= counter;
+		}
 	return (NULL);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.c                                           :+:      :+:    :+:   */
+/*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,30 +11,21 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+#include <unistd.h>
 
-static void	set_f(t_filler *f)
+void	read_map(t_filler *f)
 {
-	char	*line;
+	(void)f;
+	char *line;
 
-	get_next_line(0, &line);
-	f->me->player = ft_atoi(line + 10);
+	while (get_next_line(0, &line));
 	free(line);
-	get_next_line(0, &line);
-	f->map_x = ft_atoi(line + 8);
-	f->map_y = ft_atoi(line + 10);
-	f->me->mark = (f->me->player == P1) ? "oO" : "xX";
-	free(line);
+
 }
 
-int			main(void)
+void	play(t_filler *f)
 {
-	t_filler	f;
-	t_champ		champ;
-
-	ft_bzero(&f, sizeof(f));
-	ft_bzero(&champ, sizeof(champ));
-	f.me = &champ;
-	set_f(&f);
-	while (1)
-		play(&f);
+	read_map(f);
+	char *str = "2 8\n";
+	write(1, str, ft_strlen(str));
 }
