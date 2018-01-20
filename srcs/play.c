@@ -16,16 +16,14 @@
 void	read_map(t_filler *f)
 {
 	(void)f;
-	char *line;
-
-	while (get_next_line(0, &line));
-	free(line);
-
+	char *str = "1 8\n";
+	write(1, str, ft_strlen(str));
 }
 
 void	play(t_filler *f)
 {
-	read_map(f);
-	char *str = "2 8\n";
-	write(1, str, ft_strlen(str));
+	char *line;
+
+	while (get_next_line(0, &line))
+		read_map(f);
 }

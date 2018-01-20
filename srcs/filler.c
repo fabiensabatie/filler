@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-static void	set_f(t_filler *f)
+void	set_f(t_filler *f)
 {
 	char	*line;
 
@@ -28,13 +30,22 @@ static void	set_f(t_filler *f)
 
 int			main(void)
 {
-	t_filler	f;
-	t_champ		champ;
+	char *line;
+	int fd = open("fillller", O_WRONLY | O_APPEND | O_CREAT, 0644);
+	fd = open("fillller", O_WRONLY);
 
-	ft_bzero(&f, sizeof(f));
-	ft_bzero(&champ, sizeof(champ));
-	f.me = &champ;
-	set_f(&f);
 	while (1)
-		play(&f);
+	{
+			get_next_line(0, &line);
+			write(fd, line, ft_strlen(line));
+	}
+
+	// t_filler	f;
+	// t_champ		champ;
+    //
+	// ft_bzero(&f, sizeof(f));
+	// ft_bzero(&champ, sizeof(champ));
+	// f.me = &champ;
+	// set_f(&f);
+
 }
