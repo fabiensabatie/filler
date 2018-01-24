@@ -13,6 +13,30 @@
 #include "../includes/filler.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+
+void	get_map(t_filler *f)
+{
+	size_t	i;
+	char	*line;
+
+	i = 0;
+	int fd = open("res", O_WRONLY | O_APPEND);
+	if (!(f->map = (char**)ft_memalloc(f->map_y + 1)))
+		exit(1);
+	get_next_line(0, &line);
+	free(line);
+	while (i < f->map_y)
+	{
+		get_next_line(0, &line);
+		while (ft_isdigit(*line) || *line == ' ')
+			line++;
+		f->map[i++] = ft_strdup(line);
+	}
+	i = 0;
+	while (i < f->map_y)
+		ft_fprintf(fd, "%s\n", f->map[i++]);
+}
 
 void	set_f(t_filler *f)
 {
@@ -22,30 +46,32 @@ void	set_f(t_filler *f)
 	f->me->player = ft_atoi(line + 10);
 	free(line);
 	get_next_line(0, &line);
-	f->map_x = ft_atoi(line + 8);
-	f->map_y = ft_atoi(line + 10);
+	f->map_y = ft_atoi(line + 8);
+	f->map_x = ft_atoi(line + 10);
 	f->me->mark = (f->me->player == P1) ? "oO" : "xX";
 	free(line);
 }
 
+
+
 int			main(void)
 {
-	char *line;
-	int fd = open("fillller", O_WRONLY | O_APPEND | O_CREAT, 0644);
-	fd = open("fillller", O_WRONLY);
+	t_filler	f;
+	t_champ		champ;
 
-	while (1)
-	{
-			get_next_line(0, &line);
-			write(fd, line, ft_strlen(line));
-	}
-
-	// t_filler	f;
-	// t_champ		champ;
-    //
-	// ft_bzero(&f, sizeof(f));
-	// ft_bzero(&champ, sizeof(champ));
-	// f.me = &champ;
-	// set_f(&f);
+	ft_bzero(&f, sizeof(f));
+	ft_bzero(&champ, sizeof(champ));
+	f.me = &champ;
+	set_f(&f);
+	get_map(&f);
+	// int fd = open("res", O_WRONLY | O_APPEND);
+	// dprintf(fd, "%s\n", f.map[0]);
+	// dprintf(fd, "%s\n", f.map[1]);
+	// dprintf(fd, "%s\n", f.map[2]);
+	// dprintf(fd, "%s\n", f.map[3]);
+	// dprintf(fd, "%s\n", f.map[4]);
+	// dprintf(fd, "%s\n", f.map[5]);
+	// dprintf(fd, "%s\n", f.map[6]);
+	// dprintf(fd, "%s\n", f.map[7]);
 
 }

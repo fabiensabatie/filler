@@ -28,6 +28,7 @@ int			ft_sprintf(char **str, const char *format, ...)
 	*str = s.buffer;
 	va_end(s.ap);
 	free(f_start);
+	free(s.buffer);
 	return (s.cnt);
 }
 
@@ -43,6 +44,24 @@ int			ft_printf(const char *format, ...)
 	va_start(s.ap, format);
 	ft_vprintf(&s);
 	write(1, s.buffer, s.cnt);
+	va_end(s.ap);
+	free(f_start);
+	free(s.buffer);
+	return (s.cnt);
+}
+
+int			ft_fprintf(int fd, const char *format, ...)
+{
+	t_print	s;
+	char	*f_start;
+
+	ft_bzero(&s, sizeof(s));
+	s.format = ft_strdup((char *)format);
+	s.buffer = ft_strdup("");
+	f_start = s.format;
+	va_start(s.ap, format);
+	ft_vprintf(&s);
+	write(fd, s.buffer, s.cnt);
 	va_end(s.ap);
 	free(f_start);
 	free(s.buffer);

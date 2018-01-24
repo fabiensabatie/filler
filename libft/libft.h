@@ -87,6 +87,7 @@ typedef struct		s_print
 
 int					ft_printf(const char *format, ...);
 int					ft_sprintf(char **str, const char *format, ...);
+int					ft_fprintf(int fd, const char *format, ...);
 void				ft_vprintf(t_print *s);
 void				handle_post_digit(t_print *s, int mode, int i);
 void				fill_buffer(t_print *s, int mode, char *str, char c);

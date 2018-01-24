@@ -58,6 +58,7 @@ typedef struct	s_filler
 	t_piece		*cur_piece;
 	size_t		map_x;
 	size_t		map_y;
+	char		**map;
 	float		aim_left;
 	float		aim_right;
 	float		center_x;
