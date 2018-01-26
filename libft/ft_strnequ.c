@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 23:32:31 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/08 23:32:32 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:53:46 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
 /*
 ** Compare lexicographiquement s1 et s2 jusqu’à n caractères maximum

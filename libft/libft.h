@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:49:41 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/19 17:02:57 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:26:33 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <wchar.h>
 # include <stdarg.h>
 # include <inttypes.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <fcntl.h>
 # define BUFF_SIZE 10000
 # define BEFORE 0
 # define AFTER 1

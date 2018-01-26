@@ -6,13 +6,11 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 22:59:46 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/09 22:59:48 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:50:44 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <string.h>
 
 /*
 ** Alloue (avec malloc(3)) et retourne un maillon “frais”. Les champs content

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 23:25:55 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/08 23:25:58 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:53:30 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <string.h>
 
 /*
 ** Applique la fonction f à chaque caractère de la chaine de caractères

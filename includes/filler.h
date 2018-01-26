@@ -6,16 +6,16 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/19 18:19:02 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:54:43 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 # include "../libft/libft.h"
-# include <stdlib.h>
-# define MARK 0;
-# define L_MARK 1;
+# define MARK 0
+# define L_MARK 1
+# define AIM (0.66)
 
 typedef enum	e_player
 {
@@ -31,10 +31,19 @@ typedef enum	e_dir
 	RIGHT
 }				t_dir;
 
+typedef struct	s_map
+{
+	size_t		size_x;
+	size_t		size_y;
+	char		**grid;
+}				t_map;
+
+
 typedef struct	s_piece
 {
-	size_t		piece_x;
-	size_t		piece_y;
+	size_t		size_x;
+	size_t		size_y;
+	char		**shape;
 }				t_piece;
 
 typedef struct	s_opponent
@@ -49,22 +58,25 @@ typedef struct	s_champ
 {
 	t_player	player;
 	char		*mark;
+	float		aim_left;
+	float		aim_right;
+	float		center_x;
+	float		center_y;
 }				t_champ;
 
 typedef struct	s_filler
 {
 	t_champ		*me;
 	t_op		*op;
-	t_piece		*cur_piece;
-	size_t		map_x;
-	size_t		map_y;
-	char		**map;
-	float		aim_left;
-	float		aim_right;
-	float		center_x;
-	float		center_y;
+	t_piece		*piece;
+	t_map		*map;
+	size_t		round;
+	size_t		i;
 }				t_filler;
 
+void	set_env(t_filler *f);
+void	get_map(t_filler *f);
+void	get_piece(t_filler *f);
 void	play(t_filler *f);
 
 #endif

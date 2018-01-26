@@ -6,12 +6,10 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:44:52 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/28 21:28:46 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:53:15 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
 /*

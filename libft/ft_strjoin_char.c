@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 19:21:37 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/09 19:21:38 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:53:08 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
 char	*ft_strjoin_char(char const *s1, char c)

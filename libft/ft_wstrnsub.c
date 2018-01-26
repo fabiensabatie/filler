@@ -6,13 +6,11 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:17:25 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/21 16:54:56 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:54:58 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
-#include <wchar.h>
+#include "libft.h"
 
 /*
 ** Alloue (avec malloc(3)) et retourne la copie “fraiche” d’un tronçon

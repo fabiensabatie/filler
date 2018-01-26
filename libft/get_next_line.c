@@ -6,14 +6,10 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 17:09:53 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/29 17:42:07 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:55:24 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static t_list		*find_list(t_list *list, int fd)

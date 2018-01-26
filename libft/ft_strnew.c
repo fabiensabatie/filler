@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 22:16:00 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/08 22:16:02 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:53:50 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
 /*
 ** Alloue (avec malloc(3)) et retourne une chaine de caractère “fraiche”

@@ -6,13 +6,11 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:25 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/19 17:04:01 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:51:39 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 int			ft_sprintf(char **str, const char *format, ...)
 {

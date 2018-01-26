@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_retsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:24:23 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/11/09 14:24:24 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:52:37 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_retsplit(char *str, char c, int n)
 {

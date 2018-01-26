@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:18:12 by fsabatie          #+#    #+#              #
-#    Updated: 2018/01/19 17:08:40 by fsabatie         ###   ########.fr        #
+#    Updated: 2018/01/25 14:57:29 by fsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ FILL_PATH = srcs
 OBJ_PATH = obj
 
 FILL_SRC =	filler.c \
-			play.c
+			play.c \
+			params.c \
+			map.c \
+			piece.c
 
 SRC_NAME =	ft_strjoin_char.c \
 			ft_strjoinfree.c \
