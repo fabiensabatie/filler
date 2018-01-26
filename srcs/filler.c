@@ -14,19 +14,27 @@
 
 int			main(void)
 {
-	t_filler *f;
+	t_filler	f;
+	t_champ		me;
+	t_op		op;
+	t_map		m;
+	t_piece		p;
 
-	f = set_env();
-	while (!f->round)
+	ft_bzero(&f, sizeof(f));
+	ft_bzero(&me, sizeof(me));
+	ft_bzero(&op, sizeof(op));
+	ft_bzero(&m, sizeof(m));
+	ft_bzero(&p, sizeof(p));
+	f.me = &me;
+	f.op = &op;
+	f.map = &m;
+	f.p = &p;
+	set_env(&f);
+	while (!f.round)
 	{
-		get_map(f);
-		f->i = 0;
-		while (f->i < f->map->size_y)
-			ft_printf("%s\n", f->map->grid[f->i++]);
-		get_piece(f);
-		// f->i = 0;
-		// while (f->i < f->p->size_y)
-		// 	ft_printf("%s\n", f->p->shape[f->i++]);
-		f->round++;
+		get_map(&f);
+		get_piece(&f);
+		play(&f);
+		f.round++;
 	}
 }

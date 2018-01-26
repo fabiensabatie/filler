@@ -12,28 +12,14 @@
 
 #include "../includes/filler.h"
 
-void	set_param(t_filler *f)
+void	set_env(t_filler *f)
 {
-	(void)f;
 	char *line;
 
 	get_next_line(0, &line);
 	f->me->player = (ft_strstr(line, "p1")) ? P1 : P2;
 	f->me->aim_left = AIM;
 	f->me->aim_right = AIM;
-	f->map = NULL;
 	f->round = 0;
 	free(line);
-}
-
-t_filler	*set_env(void)
-{
-	t_champ	*me;
-	t_filler *f;
-
-	P_ALLOC(me, t_champ*, sizeof(me));
-	P_ALLOC(f, t_filler*, sizeof(f));
-	f->me = me;
-	set_param(f);
-	return (f);
 }

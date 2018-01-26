@@ -60,8 +60,8 @@ typedef struct	s_champ
 	char		mark;
 	float		aim_left;
 	float		aim_right;
-	float		center_x;
-	float		center_y;
+	size_t		center_x;
+	size_t		center_y;
 }				t_champ;
 
 typedef struct	s_filler
@@ -70,13 +70,14 @@ typedef struct	s_filler
 	t_op		*op;
 	t_piece		*p;
 	t_map		*map;
+	t_map		*pr_map;
 	size_t		round;
 	size_t		i;
-	char		*gnl_start;
 }				t_filler;
 
-t_filler	*set_env(void);
-void		get_map(t_filler *f);
-void		get_piece(t_filler *f);
+void	set_env(t_filler *f);
+void	get_map(t_filler *f);
+void	get_piece(t_filler *f);
+void	play(t_filler *f);
 
 #endif
