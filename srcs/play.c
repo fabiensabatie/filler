@@ -12,8 +12,3 @@
 
 #include "../includes/filler.h"
 
-void	play(t_filler *f)
-{
-	(void)f;
-	ft_printf("2 8\n");
-}

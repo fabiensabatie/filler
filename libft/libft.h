@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 100000
 # define BEFORE 0
 # define AFTER 1
 # define DIGITS 0
@@ -40,6 +40,7 @@
 # define CR			"\x1b[39m"
 # define BLINKON	"\x1b[5m"
 # define BLINKOFF	"\x1b[25m"
+# define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
 
 /*
 ** PRINTF
@@ -93,7 +94,7 @@ typedef struct		s_print
 
 int					ft_printf(const char *format, ...);
 int					ft_sprintf(char **str, const char *format, ...);
-int					ft_fprintf(int fd, const char *format, ...);
+int					ft_dprintf(int fd, const char *format, ...);
 void				ft_vprintf(t_print *s);
 void				handle_post_digit(t_print *s, int mode, int i);
 void				fill_buffer(t_print *s, int mode, char *str, char c);
@@ -110,6 +111,15 @@ void				handle_bonus(t_print *s);
 /*
 ** GET_NEXT_LINE
 */
+
+typedef struct	s_file
+{
+	char			*memstr;
+	char			*start;
+	int				fd;
+	struct s_file	*next;
+}				t_file;
+
 
 int					get_next_line(const int fd, char **line);
 

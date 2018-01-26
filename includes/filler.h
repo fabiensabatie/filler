@@ -57,7 +57,7 @@ typedef struct	s_opponent
 typedef struct	s_champ
 {
 	t_player	player;
-	char		*mark;
+	char		mark;
 	float		aim_left;
 	float		aim_right;
 	float		center_x;
@@ -68,15 +68,15 @@ typedef struct	s_filler
 {
 	t_champ		*me;
 	t_op		*op;
-	t_piece		*piece;
+	t_piece		*p;
 	t_map		*map;
 	size_t		round;
 	size_t		i;
+	char		*gnl_start;
 }				t_filler;
 
-void	set_env(t_filler *f);
-void	get_map(t_filler *f);
-void	get_piece(t_filler *f);
-void	play(t_filler *f);
+t_filler	*set_env(void);
+void		get_map(t_filler *f);
+void		get_piece(t_filler *f);
 
 #endif

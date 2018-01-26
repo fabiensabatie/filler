@@ -48,7 +48,7 @@ int			ft_printf(const char *format, ...)
 	return (s.cnt);
 }
 
-int			ft_fprintf(int fd, const char *format, ...)
+int			ft_dprintf(int fd, const char *format, ...)
 {
 	t_print	s;
 	char	*f_start;

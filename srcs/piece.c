@@ -12,43 +12,43 @@
 
 #include "../includes/filler.h"
 
-static void	init_piece(t_filler *f)
+static t_piece	*init_piece(t_filler *f)
 {
-	char *line;
-	char *s;
 	t_piece	*p;
+	char *l;
 
-	p = ft_memalloc(sizeof(p));
-	get_next_line(0, &line);
-	s = line;
-	while (!ft_isdigit(*line))
-		line++;
-	p->size_y = ft_atoi(line);
-	while (ft_isdigit(*line))
-		line++;
-	p->size_x = ft_atoi(line);
+	P_ALLOC(p, t_piece*, sizeof(p));
+	get_next_line(0, &l);
+	p->size_y = ft_atoi(l + 6);
 	f->i = 0;
-	if (!(p->shape = (char**)malloc(sizeof(char*) * (p->size_y + 1))))
-		exit(1);
+	while (ft_isdigit(*(l + 6 + f->i)))
+		f->i++;
+	p->size_x = ft_atoi(l + 6 + f->i);
+	free(l);
+	P_ALLOC(p->shape, char**, (sizeof(char*) * (p->size_y + 1)));
+	f->i = 0;
+	ft_printf("Done\n");
 	while (f->i < p->size_y)
-		p->shape[f->i++] = ft_strnew(1);
-	f->piece = p;
-
+		P_ALLOC(p->shape[f->i++], char*, (sizeof(char) * (p->size_x + 1)));
+	ft_printf("2Done");
+	return (p);
 }
 
 void	get_piece(t_filler *f)
 {
-	char *line;
+	// char	*l;
 
-	int fd = open("res", O_WRONLY | O_APPEND);
-	init_piece(f);
-	f->i = 0;
-	while (f->i < f->piece->size_y)
-	{
-		get_next_line(0, &line);
-		f->piece->shape[f->i++] = ft_strdup(line);
-	}
-	f->i = 0;
-	while (f->i < f->piece->size_y)
-		ft_fprintf(fd, "%s\n", f->piece->shape[f->i++]);
+	if (!f->round)
+		(void)f;
+	f->p = init_piece(f);
+
+
+	// i = 0;
+	// while (i < f->p->size_y)
+	// {
+	// 	f->i = 0;
+	// 	get_next_line(0, &l);
+	// 	ft_strcpy(f->p->shape[i++], l);
+	// 	free(l);
+	// }
 }

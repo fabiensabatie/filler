@@ -12,31 +12,28 @@
 
 #include "../includes/filler.h"
 
-static void	set_f(t_filler *f)
+void	set_param(t_filler *f)
 {
-	char	*line;
-	size_t	i;
-	t_map	*m;
+	(void)f;
+	char *line;
 
-	i = 0;
-	m = ft_memalloc(sizeof(m));
 	get_next_line(0, &line);
-	f->me->player = ft_atoi(line + 10);
-	free(line);
-	f->me->mark = (f->me->player == P1) ? "oO" : "xX";
+	f->me->player = (ft_strstr(line, "p1")) ? P1 : P2;
 	f->me->aim_left = AIM;
 	f->me->aim_right = AIM;
+	f->map = NULL;
 	f->round = 0;
-	f->map = m;
+	free(line);
 }
 
-void	set_env(t_filler *f)
+t_filler	*set_env(void)
 {
-	t_champ		champ;
+	t_champ	*me;
+	t_filler *f;
 
-	ft_bzero(f, sizeof(f));
-	ft_bzero(&champ, sizeof(champ));
-	f->me = &champ;
-	set_f(f);
+	P_ALLOC(me, t_champ*, sizeof(me));
+	P_ALLOC(f, t_filler*, sizeof(f));
+	f->me = me;
+	set_param(f);
+	return (f);
 }
-

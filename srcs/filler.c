@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
 
 int			main(void)
 {
-	t_filler	f;
+	t_filler *f;
 
-	set_env(&f);
-	while (!f.round)
+	f = set_env();
+	while (!f->round)
 	{
-		get_map(&f);
-		// f.i = 0;
-		// while (f.i < f.map->size_y)
-		// 	ft_printf("Line: %s\n", f.map->grid[f.i++]);
-		f.round++;
-		get_piece(&f);
-		play(&f);
+		get_map(f);
+		f->i = 0;
+		while (f->i < f->map->size_y)
+			ft_printf("%s\n", f->map->grid[f->i++]);
+		get_piece(f);
+		// f->i = 0;
+		// while (f->i < f->p->size_y)
+		// 	ft_printf("%s\n", f->p->shape[f->i++]);
+		f->round++;
 	}
 }

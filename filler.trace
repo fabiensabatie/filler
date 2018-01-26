@@ -1,5 +1,6 @@
-seed = 6898
-O: error on input
-players/abanlin.filler won
+seed = 7872
+X: error on input
+players/fsabatie.filler: Segfault at 0
+players/hcao.filler won
 Score:
-0AGAINST0
+8AGAINST0
