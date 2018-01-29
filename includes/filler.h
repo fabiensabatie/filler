@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/25 17:54:43 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/28 20:31:22 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ typedef struct	s_piece
 
 typedef struct	s_opponent
 {
+	char		mark;
 	size_t		op_last_x;
 	size_t		op_last_y;
+	size_t		center_x;
+	size_t		center_y;
 	t_dir		last_dir;
 	t_dir		avg_dir;
 }				t_op;
@@ -58,10 +61,10 @@ typedef struct	s_champ
 {
 	t_player	player;
 	char		mark;
-	float		aim_left;
-	float		aim_right;
-	size_t		center_x;
-	size_t		center_y;
+	float		aim_one[2];
+	float		aim_two[2];
+	float		center_x;
+	float		center_y;
 }				t_champ;
 
 typedef struct	s_filler

@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/25 19:19:07 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/28 17:14:51 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,35 @@ static int	get_msize(t_filler *f)
 	return (1);
 }
 
+static void init_map(t_filler *f)
+{
+	size_t i;
+
+	i = 1;
+	P_ALLOC(f->map->grid, char**, (sizeof(char*) * (f->map->size_y + 1)))
+	while (i <= f->map->size_y)
+		P_ALLOC(f->map->grid[i++], char*, (f->map->size_x + 2))
+}
+
 void		get_map(t_filler *f)
 {
 	char	*line;
+	char	*cat;
 	size_t	i;
 
-	i = 0;
 	if (!f->round && get_msize(f))
-	{
-		P_ALLOC(f->map->grid, char**, (sizeof(char*) * (f->map->size_y + 1)))
-		while (i < f->map->size_y)
-			P_ALLOC(f->map->grid[i++], char*, (f->map->size_x + 1))
-	}
+		init_map(f);
 	get_next_line(0, &line);
 	free(line);
-	f->i = 0;
-	i = 0;
-	while (i < f->map->size_y && get_next_line(0, &line))
+	f->i = 1;
+	i = 1;
+	while (i <= f->map->size_y && get_next_line(0, &line))
 	{
 		while (ft_isdigit(line[f->i]) || line[f->i] == ' ')
 			f->i++;
-		ft_strcpy(f->map->grid[i++], line + f->i);
+		cat = ft_strjoin(" ", line + f->i);
+		ft_strcpy(f->map->grid[i++], cat);
 		free(line);
+		free(cat);
 	}
 }

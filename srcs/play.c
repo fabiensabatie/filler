@@ -6,26 +6,27 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/25 15:11:28 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/29 00:40:42 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	get_X(t_filler *f)
+static void	get_mark(t_filler *f, char mark,
+float *center_x, float *center_y)
 {
 	size_t i;
 
-	i = 0;
-	while (i < f->map->size_y)
+	i = 1;
+	while (i <= f->map->size_y)
 	{
-		f->i = 0;
-		while (f->i < f->map->size_x)
+		f->i = 1;
+		while (f->i <= f->map->size_x)
 		{
-			if (f->map->grid[i][f->i] == 'X')
+			if (f->map->grid[i][f->i] == mark)
 			{
-				f->me->center_x = f->i;
-				f->me->center_y = i;
+				*center_x = f->i;
+				*center_y = i;
 				return ;
 			}
 			f->i++;
@@ -34,11 +35,92 @@ static void	get_X(t_filler *f)
 	}
 }
 
+static void	res_aim(t_filler *f, t_vec *vec, t_vec *mid)
+{
+	t_equa *e;
+	float x_z;
+	float x_X;
+	float y_z;
+	float y_Y;
+	float coord[2][2];
+	int fd = open("res", O_WRONLY | O_APPEND);
+
+	e = ft_equanew(0, 0, vec->y / vec->x, 0);
+	e->b = mid->y - e->a * mid->x;
+	dprintf(fd, "The equation is: y = %fx + %f\n", e->a, e->b);
+	x_z = (e->a != 0) ? (0 - e->b) / e->a : -1;
+	y_z = e->a * 0 + e->b;
+	x_X = (e->a != 0) ? ((float)f->map->size_y - e->b) / e->a : -1;
+	y_Y = e->a * (float)f->map->size_x + e->b;
+	f->i = 0;
+	dprintf(fd, "x_z = %1.f\ny_z = %1.f\nx_X = %1.f\ny_Y = %1.f\n", x_z, y_z, x_X, y_Y);
+	dprintf(fd, "MAP_SIZE: %ld %ld\n", f->map->size_x, f->map->size_y);
+	if (x_z <= f->map->size_y && x_z > 0
+	&& (coord[f->i][1] = x_z))
+	{
+		ft_dprintf(fd, "IN X_Z\n");
+		coord[f->i++][0] = 0;
+	}
+	if (y_z <= f->map->size_x && y_z > 0
+	&& (coord[f->i][0] = y_z))
+	{
+		ft_dprintf(fd, "IN Y_Z\n");
+		coord[f->i++][1] = 0;
+	}
+	if (x_X <= f->map->size_y && x_X > 0
+	&& ((coord[f->i][1] = x_X)))
+	{
+		ft_dprintf(fd, "IN X_X\n");
+		coord[f->i++][0] = (float)f->map->size_y;
+	}
+	if (y_Y <= f->map->size_x && y_Y > 0
+	&& (coord[f->i][0] = y_Y))
+	{
+		ft_dprintf(fd, "IN Y_Y\n");
+		coord[f->i][1] = (float)f->map->size_x;
+	}
+	dprintf(fd, "AIM_ONE : %1.f %1.f\nAIM_TWO : %1.f %1.f\n",
+	coord[0][0], coord[0][1], coord[1][0], coord[1][1]);
+}
+
+static void	get_aim(t_filler *f)
+{
+	t_vec	*a;
+	t_vec	*b;
+	t_vec	*mid;
+	t_vec	*vec;
+
+	// int fd = open("res", O_WRONLY | O_APPEND);
+	a = ft_vecnew(0, 0);
+	b = ft_vecnew(0, 0);
+	get_mark(f, f->me->mark, &a->x, &a->y);
+	get_mark(f, f->op->mark, &b->x, &b->y);
+	int fd = open("res", O_WRONLY | O_APPEND);
+	if (a->y > b->y)
+		ft_swapvec(a, b);
+	dprintf(fd, "E AT: %.1f %.1f\n", a->x, a->y);
+	dprintf(fd, "F AT: %.1f %.1f\n", b->x, b->y);
+	if (a->y == b->y)
+	{
+		f->me->aim_one[0] = (b->y - a->y) / 2;
+		f->me->aim_one[1] = 0;
+		f->me->aim_two[0] = (b->y - a->y) / 2;
+		f->me->aim_two[1] = f->map->size_y;
+		return ;
+	}
+	dprintf(fd, "With : a(%.1f, %.1f) and b(%.1f, %.1f)\n", a->x, a->y, b->x, b->y);
+	mid = ft_getmidcoor(a, b);
+	dprintf(fd, "MID is : (%.1f, %.1f)\n", mid->x, mid->y);
+	vec = ft_vecnew(mid->x - b->x, mid->y - b->y);
+	dprintf(fd, "VEC is : (%.1f, %.1f)\n", vec->x, vec->y);
+	vec = ft_get_perpendicular_vec(vec, TRUE);
+	dprintf(fd, "PVEC is : (%.1f, %.1f)\n", vec->x, vec->y);
+	res_aim(f, vec, mid);
+}
+
 void		play(t_filler *f)
 {
-	size_t i;
-
-	i = 0;
-	get_X(f);
-	ft_printf("%d %d\n", f->me->center_y, f->me->center_x);
+	get_aim(f);
+	get_mark(f, f->me->mark, &f->me->center_x, &f->me->center_y);
+	ft_printf("%d %d\n", f->me->center_x, f->me->center_y);
 }

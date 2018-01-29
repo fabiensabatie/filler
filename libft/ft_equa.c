@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_equa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/28 21:32:11 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/28 16:54:16 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/filler.h"
+#include "libft.h"
 
-void	set_env(t_filler *f)
+t_equa	*ft_equanew(float x, float y, float a, float b)
 {
-	char *line;
+	t_equa *e;
 
-	get_next_line(0, &line);
-	f->me->player = (ft_strstr(line, "p1")) ? P1 : P2;
-	f->me->mark = (f->me->player == P1) ? 'O' : 'X';
-	f->op->mark = (f->me->mark == 'X') ? 'O' : 'X';
-	f->round = 0;
-	free(line);
+	P_ALLOC(e, t_equa*, sizeof(e))
+	e->x = x;
+	e->y = y;
+	e->a = a;
+	e->b = b;
+	return (e);
 }

@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:18:12 by fsabatie          #+#    #+#              #
-#    Updated: 2018/01/25 14:57:29 by fsabatie         ###   ########.fr        #
+#    Updated: 2018/01/28 16:54:43 by fsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,9 @@ SRC_NAME =	ft_strjoin_char.c \
 			ft_bzero.c \
 			ft_atoi.c \
 			ft_itoa.c \
+			ft_equa.c \
 			ft_abs.c \
+			ft_vec.c \
 			buffer.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
