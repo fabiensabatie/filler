@@ -112,13 +112,13 @@ void				handle_bonus(t_print *s);
 ** GET_NEXT_LINE
 */
 
-typedef struct	s_file
+typedef struct		s_file
 {
 	char			*memstr;
 	char			*start;
 	int				fd;
 	struct s_file	*next;
-}				t_file;
+}					t_file;
 
 
 int					get_next_line(const int fd, char **line);
@@ -134,19 +134,19 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct	s_vec
+typedef struct		s_vec
 {
-	float	x;
-	float	y;
-}				t_vec;
+	float			x;
+	float			y;
+}					t_vec;
 
-typedef struct	s_equa
+typedef struct		s_equa
 {
-	float	x;
-	float	y;
-	float	a;
-	float	b;
-}				t_equa;
+	float			x;
+	float			y;
+	float			a;
+	float			b;
+}					t_equa;
 
 unsigned long long	ft_abs(int n);
 size_t				ft_strlen(char *str);

@@ -12,6 +12,25 @@
 
 #include "../includes/filler.h"
 
+void	print_map(t_filler *f)
+{
+	size_t i;
+	int fd = open("res", O_WRONLY | O_APPEND);
+
+	i = 1;
+	while (i <= f->map->size_y)
+	{
+		f->i = 1;
+		while (f->i <= f->map->size_x)
+		{
+			dprintf(fd, "%c", f->map->grid[i][f->i]);
+			f->i++;
+		}
+		dprintf(fd, "\n");
+		i++;
+	}
+}
+
 static int	get_msize(t_filler *f)
 {
 	char* line;
@@ -50,12 +69,14 @@ void		get_map(t_filler *f)
 	free(line);
 	f->i = 1;
 	i = 1;
+	int fd = open("res", O_WRONLY | O_APPEND);
 	while (i <= f->map->size_y && get_next_line(0, &line))
 	{
 		while (ft_isdigit(line[f->i]) || line[f->i] == ' ')
 			f->i++;
 		cat = ft_strjoin(" ", line + f->i);
 		ft_strcpy(f->map->grid[i++], cat);
+		dprintf(fd, "Line: %s\n", f->map->grid[i - 1]);
 		free(line);
 		free(cat);
 	}

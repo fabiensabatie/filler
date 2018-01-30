@@ -82,5 +82,6 @@ void	set_env(t_filler *f);
 void	get_map(t_filler *f);
 void	get_piece(t_filler *f);
 void	play(t_filler *f);
+int		p_fits(t_filler *f, int x, int y);
 
 #endif

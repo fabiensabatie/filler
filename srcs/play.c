@@ -16,6 +16,7 @@ static void	get_mark(t_filler *f, char mark,
 float *center_x, float *center_y)
 {
 	size_t i;
+	int fd = open("res", O_WRONLY | O_APPEND);
 
 	i = 1;
 	while (i <= f->map->size_y)
@@ -27,6 +28,7 @@ float *center_x, float *center_y)
 			{
 				*center_x = f->i;
 				*center_y = i;
+				dprintf(fd, "grid[%li][%li] = %c\n", i, f->i, f->map->grid[i][f->i]);
 				return ;
 			}
 			f->i++;
@@ -55,31 +57,19 @@ static void	res_aim(t_filler *f, t_vec *vec, t_vec *mid)
 	f->i = 0;
 	dprintf(fd, "x_z = %1.f\ny_z = %1.f\nx_X = %1.f\ny_Y = %1.f\n", x_z, y_z, x_X, y_Y);
 	dprintf(fd, "MAP_SIZE: %ld %ld\n", f->map->size_x, f->map->size_y);
-	if (x_z <= f->map->size_y && x_z > 0
-	&& (coord[f->i][1] = x_z))
-	{
-		ft_dprintf(fd, "IN X_Z\n");
-		coord[f->i++][0] = 0;
-	}
-	if (y_z <= f->map->size_x && y_z > 0
-	&& (coord[f->i][0] = y_z))
-	{
-		ft_dprintf(fd, "IN Y_Z\n");
+	if (x_z <= f->map->size_x && x_z > 0
+	&& (coord[f->i][0] = x_z))
 		coord[f->i++][1] = 0;
-	}
-	if (x_X <= f->map->size_y && x_X > 0
-	&& ((coord[f->i][1] = x_X)))
-	{
-		ft_dprintf(fd, "IN X_X\n");
-		coord[f->i++][0] = (float)f->map->size_y;
-	}
-	if (y_Y <= f->map->size_x && y_Y > 0
-	&& (coord[f->i][0] = y_Y))
-	{
-		ft_dprintf(fd, "IN Y_Y\n");
-		coord[f->i][1] = (float)f->map->size_x;
-	}
-	dprintf(fd, "AIM_ONE : %1.f %1.f\nAIM_TWO : %1.f %1.f\n",
+	if (y_z <= f->map->size_y && y_z > 0
+	&& (coord[f->i][1] = y_z))
+		coord[f->i++][0] = 0;
+	if (x_X <= f->map->size_x && x_X > 0
+	&& ((coord[f->i][0] = x_X)))
+		coord[f->i++][1] = (float)f->map->size_y;
+	if (y_Y <= f->map->size_y && y_Y > 0
+	&& (coord[f->i][1] = y_Y))
+		coord[f->i][0] = (float)f->map->size_x;
+	dprintf(fd, "AIM_ONE : %f %f\nAIM_TWO : %f %f\n",
 	coord[0][0], coord[0][1], coord[1][0], coord[1][1]);
 }
 
@@ -90,16 +80,15 @@ static void	get_aim(t_filler *f)
 	t_vec	*mid;
 	t_vec	*vec;
 
-	// int fd = open("res", O_WRONLY | O_APPEND);
+	int fd = open("res", O_WRONLY | O_APPEND);
 	a = ft_vecnew(0, 0);
 	b = ft_vecnew(0, 0);
 	get_mark(f, f->me->mark, &a->x, &a->y);
 	get_mark(f, f->op->mark, &b->x, &b->y);
-	int fd = open("res", O_WRONLY | O_APPEND);
 	if (a->y > b->y)
 		ft_swapvec(a, b);
-	dprintf(fd, "E AT: %.1f %.1f\n", a->x, a->y);
-	dprintf(fd, "F AT: %.1f %.1f\n", b->x, b->y);
+	dprintf(fd, "F AT: %.1f %.1f\n", a->x, a->y);
+	dprintf(fd, "E AT: %.1f %.1f\n", b->x, b->y);
 	if (a->y == b->y)
 	{
 		f->me->aim_one[0] = (b->y - a->y) / 2;
@@ -118,9 +107,10 @@ static void	get_aim(t_filler *f)
 	res_aim(f, vec, mid);
 }
 
+
 void		play(t_filler *f)
 {
-	get_aim(f);
-	get_mark(f, f->me->mark, &f->me->center_x, &f->me->center_y);
-	ft_printf("%d %d\n", f->me->center_x, f->me->center_y);
+	if (!f->round)
+		get_aim(f);
+	// ft_printf("%d %d\n", f->me->center_x, f->me->center_y);
 }
