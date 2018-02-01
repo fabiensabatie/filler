@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/28 20:31:22 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:54:49 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct	s_piece
 {
 	size_t		size_x;
 	size_t		size_y;
+	size_t		decal_x;
+	size_t		decal_y;
 	char		**shape;
 }				t_piece;
 
@@ -82,6 +84,7 @@ void	set_env(t_filler *f);
 void	get_map(t_filler *f);
 void	get_piece(t_filler *f);
 void	play(t_filler *f);
+void	p_decal(t_filler *f);
 int		p_fits(t_filler *f, int x, int y);
 
 #endif
