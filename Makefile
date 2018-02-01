@@ -70,6 +70,7 @@ SRC_NAME =	ft_strjoin_char.c \
 			ft_lstiter.c \
 			ft_strnsub.c \
 			ft_strcsub.c \
+			ft_strcpos.c \
 			ft_putwstr.c \
 			ft_chrcstr.c \
 			ft_lstmap.c \

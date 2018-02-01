@@ -17,11 +17,11 @@
 // {
 // 	size_t i;
 //
-// 	i = 1;
-// 	while (i <= f->map->size_y)
+// 	i = 0;
+// 	while (++i <= f->map->size_y)
 // 	{
-// 		f->i = 1;
-// 		while (f->i <= f->map->size_x)
+// 		f->i = 0;
+// 		while (++f->i <= f->map->size_x)
 // 		{
 // 			if (f->map->grid[i][f->i] == mark)
 // 			{
@@ -29,9 +29,7 @@
 // 				*center_y = i;
 // 				return ;
 // 			}
-// 			f->i++;
 // 		}
-// 		i++;
 // 	}
 // }
 
@@ -114,11 +112,32 @@
 // 	res_aim(f, vec, mid);
 // }
 
+int		find_fit(t_filler *f)
+{
+	int y;
+	int x;
+
+	y = 0;
+	int fd = open("res", O_WRONLY | O_APPEND);
+	while (++y < (int)FMY)
+	{
+		x = 0;
+		while (++x < (int)FMX)
+		{
+			ft_dprintf(fd, "Testing : %d %d\n", x, y);
+			if (p_fits(f, x, y))
+				return (ft_printf("%d %d\n", x - (int)FPDX - 1, y - (int)FPDY - 1));
+		}
+	}
+	return (0);
+}
 
 void		play(t_filler *f)
 {
 	// if (!f->round)
 	// 	get_aim(f);
 	// get_coord(f);
-	
+	int fd = open("res", O_WRONLY | O_APPEND);
+	ft_dprintf(fd, "Finding fit\n");
+	find_fit(f);
 }

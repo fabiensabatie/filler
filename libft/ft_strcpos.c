@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.c                                           :+:      :+:    :+:   */
+/*   ft_strcpos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/25 19:14:30 by fsabatie         ###   ########.fr       */
+/*   Created: 2017/11/08 16:00:11 by fsabatie          #+#    #+#             */
+/*   Updated: 2018/01/25 14:54:21 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/filler.h"
+#include "libft.h"
 
-int			main(void)
+int	ft_strcpos(char *haystack, char needle)
 {
-	t_filler	f;
-	t_champ		me;
-	t_op		op;
-	t_map		m;
-	t_piece		p;
+	int i;
 
-	ft_bzero(&f, sizeof(f));
-	ft_bzero(&me, sizeof(me));
-	ft_bzero(&op, sizeof(op));
-	ft_bzero(&m, sizeof(m));
-	ft_bzero(&p, sizeof(p));
-	f.me = &me;
-	f.op = &op;
-	f.map = &m;
-	f.p = &p;
-	set_env(&f);
-	while (1)
+	i = 0;
+	while (haystack[i])
 	{
-		get_map(&f);
-		get_piece(&f);
-		play(&f);
-		f.round++;
+		if (haystack[i] == needle)
+			return (i);
+		i++;
 	}
+	return (ft_strlen(haystack));
 }

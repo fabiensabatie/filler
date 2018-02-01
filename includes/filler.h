@@ -15,7 +15,14 @@
 # include "../libft/libft.h"
 # define MARK 0
 # define L_MARK 1
-# define AIM (0.66)
+# define FMX f->map->size_x
+# define FMY f->map->size_y
+# define FMG f->map->grid
+# define FPX f->p->size_x
+# define FPY f->p->size_y
+# define FPS f->p->shape
+# define FPDX f->p->decal_x
+# define FPDY f->p->decal_y
 
 typedef enum	e_player
 {
@@ -43,8 +50,8 @@ typedef struct	s_piece
 {
 	size_t		size_x;
 	size_t		size_y;
-	size_t		decal_x;
-	size_t		decal_y;
+	int			decal_x;
+	int			decal_y;
 	char		**shape;
 }				t_piece;
 

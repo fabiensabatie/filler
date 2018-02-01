@@ -12,17 +12,44 @@
 
 #include "../includes/filler.h"
 
-void			p_decal(t_filler *f)
+int		p_fits(t_filler *f, int x, int y)
 {
+	size_t i;
+	int sp;
 
+	sp = 0;
+	i = (size_t)FPDY;
+	int fd = open("res", O_WRONLY | O_APPEND);
+	int ret;
+	while (i < FPY && y < FMY)
+	{
+		f->i = FPDX;
+		while (f->i < FPX && x < FMX)
+		{
+			if (FPS[i][f->i] == '*')
+			{
+				ft_dprintf(fd, "On map at : %d %d\n", x- 1, y-1);
+				if (FMG[y][x] == f->me->mark && !sp)
+					sp++;
+				else if (FMG[y][x] != '.')
+				{
+					ft_dprintf(fd, "Could not fit\n");
+					return (0);
+				}
+			}
+			else
+				ft_dprintf(fd, "- On map at : %d %d\n", x-1, y-1);
+			x++;
+			f->i++;
+		}
+		y++;
+		i++;
+	}
+	ret = (sp) ? 1 : 0;
+	return (ret);
 }
 
-int			p_fits(t_filler *f, int x, int y)
-{
-
-}
-
-void		get_piece(t_filler *f)
+void	init_p(t_filler *f)
 {
 	char	*line;
 	char	*s;
@@ -31,18 +58,32 @@ void		get_piece(t_filler *f)
 	i = 0;
 	get_next_line(0, &line);
 	s = line;
-	f->p->size_y = ft_atoi(ft_strstr(line, " "));
+	FPY = ft_atoi(ft_strstr(line, " "));
 	line = ft_strstr(line, " ") + 1;
 	while (ft_isdigit(*line))
 		line++;
-	f->p->size_x = ft_atoi(line);
+	FPX = ft_atoi(line);
 	free(s);
-	P_ALLOC(f->p->shape, char**, (sizeof(char*) * (f->p->size_y + 1)))
-	while (i < f->p->size_y)
-		P_ALLOC(f->p->shape[i++], char*, (f->p->size_x + 1))
-	f->i = 0;
+	P_ALLOC(FPS, char**, (sizeof(char*) * (FPY + 1)))
+	while (i < FPY)
+		P_ALLOC(FPS[i++], char*, (FPX + 1))
+}
+
+void	get_piece(t_filler *f)
+{
+	char	*line;
+	size_t	i;
+
 	i = 0;
-	while (i < f->p->size_y && get_next_line(0, &line)
-	&& ft_strcpy(f->p->shape[i++], line))
+	init_p(f);
+	FPDY = -1;
+	FPDX = (int)FPX;
+	while (i < FPY && get_next_line(0, &line))
+	{
+		FPDX = (FPDX > ft_strcpos(line, '*')) ? ft_strcpos(line, '*') : FPDX;
+		if (FPDY == -1)
+			FPDY = (ft_strcpos(line, '*') != (int)ft_strlen(line)) ? i : FPDY;
+		ft_strcpy(FPS[i++], line);
 		free(line);
+	}
 }

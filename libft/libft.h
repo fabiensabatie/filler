@@ -162,6 +162,7 @@ int					ft_isprint(int c);
 int					ft_atoi(char *str);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_memcmp(void *s1, void *s2, size_t n);
+int					ft_strcpos(char *haystack, char needle);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
