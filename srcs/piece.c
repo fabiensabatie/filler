@@ -12,44 +12,53 @@
 
 #include "../includes/filler.h"
 
-int		p_fits(t_filler *f, int x, int y)
+static int	p_fits(t_filler *f, int x, int y)
 {
-	size_t i;
-	int sp;
+	t_equa coor;
+	size_t stars;
 
-	sp = 0;
-	i = (size_t)FPDY;
-	int fd = open("res", O_WRONLY | O_APPEND);
-	int ret;
-	while (i < FPY && y < FMY)
+	stars = FPW;
+	coor.y = FPDY - 1;
+	coor.b = y - 1;
+	f->i = 0;
+	while (++coor.y < FPY)
 	{
-		f->i = FPDX;
-		while (f->i < FPX && x < FMX)
+		IFRET(++coor.b > FMY, 0);
+		coor.x = FPDX - 1;
+		coor.a = x - 1;
+		while (++coor.x < FPX)
 		{
-			if (FPS[i][f->i] == '*')
+			IFRET(++coor.a > FMX, 0);
+			if (FPS[(int)coor.y][(int)coor.x] == '*')
 			{
-				ft_dprintf(fd, "On map at : %d %d\n", x- 1, y-1);
-				if (FMG[y][x] == f->me->mark && !sp)
-					sp++;
-				else if (FMG[y][x] != '.')
-				{
-					ft_dprintf(fd, "Could not fit\n");
-					return (0);
-				}
+				IFRET(FMG[(int)coor.b][(int)coor.a] == FOPM, 0);
+				IFRET(f->i && FMG[(int)coor.b][(int)coor.a] == FMEM, 0);
+				IF(!f->i && FMG[(int)coor.b][(int)coor.a] == FMEM, f->i++);
+				IFRET(--stars == 0, f->i);
 			}
-			else
-				ft_dprintf(fd, "- On map at : %d %d\n", x-1, y-1);
-			x++;
-			f->i++;
 		}
-		y++;
-		i++;
 	}
-	ret = (sp) ? 1 : 0;
-	return (ret);
+	return (f->i);
 }
 
-void	init_p(t_filler *f)
+int			find_fit(t_filler *f)
+{
+	int y;
+	int x;
+
+	y = 0;
+	while (++y <= (int)FMY)
+	{
+		x = 0;
+		while (++x <= (int)FMX)
+			if (p_fits(f, x, y))
+				return (ft_printf("%d %d\n",
+				y - (int)FPDY - 1, x - (int)FPDX - 1));
+	}
+	return (0);
+}
+
+void		init_p(t_filler *f)
 {
 	char	*line;
 	char	*s;
@@ -64,12 +73,12 @@ void	init_p(t_filler *f)
 		line++;
 	FPX = ft_atoi(line);
 	free(s);
-	P_ALLOC(FPS, char**, (sizeof(char*) * (FPY + 1)))
+	P_ALLOC(FPS, char**, (sizeof(char*) * (FPY + 1)));
 	while (i < FPY)
-		P_ALLOC(FPS[i++], char*, (FPX + 1))
+		P_ALLOC(FPS[i++], char*, (FPX + 1));
 }
 
-void	get_piece(t_filler *f)
+void		get_piece(t_filler *f)
 {
 	char	*line;
 	size_t	i;
@@ -78,12 +87,14 @@ void	get_piece(t_filler *f)
 	init_p(f);
 	FPDY = -1;
 	FPDX = (int)FPX;
+	FPW = 0;
 	while (i < FPY && get_next_line(0, &line))
 	{
 		FPDX = (FPDX > ft_strcpos(line, '*')) ? ft_strcpos(line, '*') : FPDX;
 		if (FPDY == -1)
-			FPDY = (ft_strcpos(line, '*') != (int)ft_strlen(line)) ? i : FPDY;
-		ft_strcpy(FPS[i++], line);
+			FPDY = (ft_strcpos(line, '*') < (int)ft_strlen(line)) ? i : FPDY;
+		ft_strcpy(FPS[i], line);
+		FPW += ft_strcount(FPS[i++], '*');
 		free(line);
 	}
 }

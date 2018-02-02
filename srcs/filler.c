@@ -34,7 +34,9 @@ int			main(void)
 	{
 		get_map(&f);
 		get_piece(&f);
-		play(&f);
+		if (!play(&f) && ft_printf("0 0\n"))
+			break ;
 		f.round++;
 	}
+	return (0);
 }

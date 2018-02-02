@@ -14,7 +14,7 @@
 
 static int	get_msize(t_filler *f)
 {
-	char* line;
+	char *line;
 	char *s;
 
 	get_next_line(0, &line);
@@ -35,11 +35,11 @@ void		get_map(t_filler *f)
 	size_t	i;
 
 	i = 1;
-	if (!f->round && get_msize(f))
+	if (get_msize(f) && !f->round)
 	{
-		P_ALLOC(FMG, char**, (sizeof(char*) * (FMY + 1)))
+		P_ALLOC(FMG, char**, (sizeof(char*) * (FMY + 1)));
 		while (i <= FMY)
-			P_ALLOC(FMG[i++], char*, (FMX + 2))
+			P_ALLOC(FMG[i++], char*, (FMX + 2));
 	}
 	get_next_line(0, &line);
 	free(line);

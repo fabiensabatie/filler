@@ -44,6 +44,7 @@ SRC_NAME =	ft_strjoin_char.c \
 			ft_putwchar.c \
 			ft_wstrnsub.c \
 			nb_printers.c \
+			ft_strcount.c \
 			ft_wstrlen.c \
 			ft_strnequ.c \
 			ft_strjoin.c \
@@ -71,6 +72,7 @@ SRC_NAME =	ft_strjoin_char.c \
 			ft_strnsub.c \
 			ft_strcsub.c \
 			ft_strcpos.c \
+			ft_strrpos.c \
 			ft_putwstr.c \
 			ft_chrcstr.c \
 			ft_lstmap.c \

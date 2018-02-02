@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+
 static t_file	*crea_liste(const int fd, t_file *firstlst)
 {
 	t_file		*liste;

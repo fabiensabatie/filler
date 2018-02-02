@@ -23,6 +23,10 @@
 # define FPS f->p->shape
 # define FPDX f->p->decal_x
 # define FPDY f->p->decal_y
+# define FPW f->p->wildcars
+# define FPW f->p->wildcars
+# define FMEM f->me->mark
+# define FOPM f->op->mark
 
 typedef enum	e_player
 {
@@ -52,6 +56,7 @@ typedef struct	s_piece
 	size_t		size_y;
 	int			decal_x;
 	int			decal_y;
+	size_t		wildcars;
 	char		**shape;
 }				t_piece;
 
@@ -90,8 +95,7 @@ typedef struct	s_filler
 void	set_env(t_filler *f);
 void	get_map(t_filler *f);
 void	get_piece(t_filler *f);
-void	play(t_filler *f);
-void	p_decal(t_filler *f);
-int		p_fits(t_filler *f, int x, int y);
+int		play(t_filler *f);
+int		find_fit(t_filler *f)
 
 #endif

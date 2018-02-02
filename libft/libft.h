@@ -41,6 +41,8 @@
 # define BLINKON	"\x1b[5m"
 # define BLINKOFF	"\x1b[25m"
 # define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
+# define IFRET(x, y) if(x) return (y)
+# define IF(x, y) if(x) (y)
 
 /*
 ** PRINTF
@@ -151,6 +153,7 @@ typedef struct		s_equa
 unsigned long long	ft_abs(int n);
 size_t				ft_strlen(char *str);
 size_t				ft_wstrlen(wchar_t *wstr);
+size_t				ft_strcount(char *haystack, char needle);
 size_t				ft_strlcat(char *s1, const char *s2, size_t n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
@@ -163,6 +166,7 @@ int					ft_atoi(char *str);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_memcmp(void *s1, void *s2, size_t n);
 int					ft_strcpos(char *haystack, char needle);
+int					ft_strrpos(char *haystack, char needle);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
