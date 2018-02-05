@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/01 13:20:06 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/04 16:09:42 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,26 @@ static void	res_aim(t_filler *f, t_vec *vec, t_vec *mid)
 {
 	t_equa	*e;
 	t_equa	res;
-	float	coord[2][2];
 
 	e = ft_equanew(0, 0, vec->y / vec->x, 0);
 	e->b = mid->y - e->a * mid->x;
 	res.y = (e->a != 0) ? (0 - e->b) / e->a : -1;
 	res.x = e->a * 0 + e->b;
-	res.a = (e->a != 0) ? ((float)f->map->size_y - e->b) / e->a : -1;
-	res.b = e->a * (float)f->map->size_x + e->b;
+	res.a = (e->a != 0) ? ((float)FMY - e->b) / e->a : -1;
+	res.b = e->a * (float)FMX + e->b;
 	f->i = 0;
-	if (res.y <= f->map->size_x && res.y > 0
-	&& (coord[f->i][0] = res.y))
-		coord[f->i++][1] = 0;
-	if (res.x <= f->map->size_y && res.x > 0
-	&& (coord[f->i][1] = res.x))
-		coord[f->i++][0] = 0;
-	if (res.a <= f->map->size_x && res.a > 0
-	&& ((coord[f->i][0] = res.a)))
-		coord[f->i++][1] = (float)f->map->size_y;
-	if (res.b <= f->map->size_y && res.b > 0
-	&& (coord[f->i][1] = res.b))
-		coord[f->i][0] = (float)f->map->size_x;
+	if (res.y <= FMX && res.y > 0
+	&& (AIM[f->i][0] = res.y))
+		AIM[f->i++][1] = 1;
+	if (res.x <= FMY && res.x > 0
+	&& (AIM[f->i][1] = res.x))
+		AIM[f->i++][0] = 1;
+	if (res.a <= FMX && res.a > 0
+	&& (AIM[f->i][0] = res.a))
+		AIM[f->i++][1] = (float)FMY;
+	if (res.b <= FMY && res.b > 0
+	&& (AIM[f->i][1] = res.b))
+		AIM[f->i][0] = (float)FMX;
 }
 
 static void	get_aim(t_filler *f)
@@ -69,16 +68,16 @@ static void	get_aim(t_filler *f)
 
 	a = ft_vecnew(0, 0);
 	b = ft_vecnew(0, 0);
-	get_mark(f, f->me->mark, &a->x, &a->y);
-	get_mark(f, f->op->mark, &b->x, &b->y);
+	get_mark(f, FMEM, &a->x, &a->y);
+	get_mark(f, FOPM, &b->x, &b->y);
 	if (a->y > b->y)
 		ft_swapvec(a, b);
 	if (a->y == b->y)
 	{
-		f->me->aim_one[0] = (b->y - a->y) / 2;
-		f->me->aim_one[1] = 0;
-		f->me->aim_two[0] = (b->y - a->y) / 2;
-		f->me->aim_two[1] = f->map->size_y;
+		AIM[0][0] = (b->y - a->y) / 2;
+		AIM[0][1] = 0;
+		AIM[1][0] = (b->y - a->y) / 2;
+		AIM[1][1] = FMY;
 		return ;
 	}
 	mid = ft_getmidcoor(a, b);
@@ -90,6 +89,9 @@ static void	get_aim(t_filler *f)
 int			play(t_filler *f)
 {
 	if (!f->round)
+	{
 		get_aim(f);
+		get_mark(f, FOPM, &AIM[2][0], &AIM[2][1]);
+	}
 	return (find_fit(f));
 }

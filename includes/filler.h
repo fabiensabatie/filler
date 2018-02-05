@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/30 18:54:49 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/04 16:07:50 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,13 @@
 # define FPW f->p->wildcars
 # define FMEM f->me->mark
 # define FOPM f->op->mark
+# define AIM f->me->aim
 
 typedef enum	e_player
 {
 	P1 = 1,
 	P2 = 2
 }				t_player;
-
-typedef enum	e_dir
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-}				t_dir;
 
 typedef struct	s_map
 {
@@ -67,16 +60,13 @@ typedef struct	s_opponent
 	size_t		op_last_y;
 	size_t		center_x;
 	size_t		center_y;
-	t_dir		last_dir;
-	t_dir		avg_dir;
 }				t_op;
 
 typedef struct	s_champ
 {
 	t_player	player;
 	char		mark;
-	float		aim_one[2];
-	float		aim_two[2];
+	float		aim[3][2];
 	float		center_x;
 	float		center_y;
 }				t_champ;
@@ -96,6 +86,6 @@ void	set_env(t_filler *f);
 void	get_map(t_filler *f);
 void	get_piece(t_filler *f);
 int		play(t_filler *f);
-int		find_fit(t_filler *f)
+int		find_fit(t_filler *f);
 
 #endif

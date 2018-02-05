@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:49:41 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/28 17:01:04 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/04 13:18:51 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
 # define IFRET(x, y) if(x) return (y)
 # define IF(x, y) if(x) (y)
+# define POW2(x) (x) * (x)
 
 /*
 ** PRINTF
