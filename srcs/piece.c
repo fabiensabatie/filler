@@ -12,34 +12,6 @@
 
 #include "../includes/filler.h"
 
-#define AIMY AIM[2][0]
-#define AIMX AIM[2][1]
-#define XY (AIMX > 1 && AIMY > 1)
-#define YX (AIMX < (int)FMX && AIMY < (int)FMY)
-
-int		get_surr(t_filler *f, char mark)
-{
-
-	AIMY = 0;
-	while (++AIMY <= (int)FMY)
-	{
-		AIMX = 0;
-		while (++AIMX <= (int)FMX)
-			if (FMG[(int)AIMY][(int)AIMX] == mark)
-			{
-				IFRET (XY && YX && FMG[(int)AIMY - 1][(int)AIMX - 1] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY - 1][(int)AIMX] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY - 1][(int)AIMX + 1] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY][(int)AIMX - 1] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY][(int)AIMX + 1] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY + 1][(int)AIMX - 1] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY + 1][(int)AIMX] == '.', 1);
-				IFRET (XY && YX && FMG[(int)AIMY + 1][(int)AIMX + 1] == '.', 1);
-			}
-	}
-	return (0);
-}
-
 static int	p_fits(t_filler *f, int x, int y)
 {
 	t_equa coor;
@@ -69,37 +41,64 @@ static int	p_fits(t_filler *f, int x, int y)
 	return (f->i);
 }
 
+int			f_bfit(t_filler *f, int pos)
+{
+	int y;
+	int x;
+	int pow;
+
+	y = 0;
+	f->bx = 0;
+	f->by = 0;
+	pow = POW2(FMY) + POW2(FMX);
+	while (++y <= (int)FMY)
+	{
+		x = 0;
+		f->i = 0;
+		while (++x <= (int)FMX)
+			if (FMG[y][x] == '*')
+				while (f->i < (size_t)pos)
+				{
+					if (POW2(y - (int)f->fits[f->i][1]) + POW2(x - (int)f->fits[f->i][0]) < (int)pow)
+					{
+						pow = POW2(y - (int)f->fits[f->i][1]) + POW2(x - (int)f->fits[f->i][0]);
+						f->bx = f->fits[f->i][1];
+						f->by = f->fits[f->i][0];
+					}
+					f->i++;
+				}
+	}
+	int fd = open("res", O_WRONLY | O_APPEND);
+	ft_dprintf(fd, "Closest aim: %d %d\n", f->by, f->bx);
+	if (f->bx && f->by)
+		return (ft_printf("%d %d\n", f->by - (int)FPDY - 1, f->bx - (int)FPDX - 1));
+	return (0);
+}
+
 int			find_fit(t_filler *f)
 {
 	int y;
 	int x;
-	int bx;
-	int by;
 	int pos;
-	size_t	pow;
 
 	y = 0;
-	bx = 0;
-	by = 0;
 	pos = 0;
-	pow = POW2(FMY) + POW2(FMX);
-	IF (!pos && FMG[(int)AIM[0][1]][(int)AIM[0][0]] != '.', pos++);
-	IF (pos == 1 && FMG[(int)AIM[1][1]][(int)AIM[1][0]] != '.', pos++);
-	//get_surr(f, FOPM);
 	while (++y <= (int)FMY)
 	{
 		x = 0;
 		while (++x <= (int)FMX)
 			if (p_fits(f, x, y))
-				if (POW2(y - (int)AIM[pos][1]) + POW2(x - (int)AIM[pos][0]) < (int)pow)
-				{
-					pow = POW2(y - (int)AIM[pos][1]) + POW2(x - (int)AIM[pos][0]);
-					bx = x;
-					by = y;
-				}
+			{
+				f->fits[pos][0] = y;
+				f->fits[pos++][1] = x;
+			}
 	}
-	if (bx != 0 && by != 0)
-		return ft_printf("%d %d\n", by - (int)FPDY - 1, bx - (int)FPDX - 1);
+	if (pos)
+	{
+		//f_bfit(f, pos);
+		return ft_printf("%d %d\n", f->fits[0][0] - (int)FPDY - 1, f->fits[0][1] - (int)FPDX - 1);
+		return f_bfit(f, pos);
+	}
 	return (0);
 }
 

@@ -80,6 +80,9 @@ typedef struct	s_filler
 	t_map		*pr_map;
 	size_t		round;
 	size_t		i;
+	int			fits[1000000][2];
+	int			bx;
+	int			by;
 }				t_filler;
 
 void	set_env(t_filler *f);
