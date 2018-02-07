@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/05 14:22:42 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/05 21:45:22 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,15 @@ int			f_bfit(t_filler *f, int pos)
 			if (FMG[y][x] == '*')
 				while (f->i < (size_t)pos)
 				{
-					if (POW2(y - (int)f->fits[f->i][1]) + POW2(x - (int)f->fits[f->i][0]) < (int)pow)
+					if (POW2(y - (int)f->fits[f->i][0]) + POW2(x - (int)f->fits[f->i][1]) < (int)pow)
 					{
-						pow = POW2(y - (int)f->fits[f->i][1]) + POW2(x - (int)f->fits[f->i][0]);
+						pow = POW2(y - (int)f->fits[f->i][0]) + POW2(x - (int)f->fits[f->i][1]);
 						f->bx = f->fits[f->i][1];
 						f->by = f->fits[f->i][0];
 					}
 					f->i++;
 				}
 	}
-	int fd = open("res", O_WRONLY | O_APPEND);
-	ft_dprintf(fd, "Closest aim: %d %d\n", f->by, f->bx);
 	if (f->bx && f->by)
 		return (ft_printf("%d %d\n", f->by - (int)FPDY - 1, f->bx - (int)FPDX - 1));
 	return (0);
@@ -94,11 +92,7 @@ int			find_fit(t_filler *f)
 			}
 	}
 	if (pos)
-	{
-		//f_bfit(f, pos);
-		return ft_printf("%d %d\n", f->fits[0][0] - (int)FPDY - 1, f->fits[0][1] - (int)FPDX - 1);
 		return f_bfit(f, pos);
-	}
 	return (0);
 }
 
