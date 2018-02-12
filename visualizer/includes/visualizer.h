@@ -17,11 +17,11 @@
 # include "../libft/includes/mlx_keys.h"
 # include "../ressources/mlx/mlx.h"
 
-# define WIN_X mlx->win_x
-# define WIN_Y mlx->win_y
-# define _ADJUST(x) ((x) * (mlx->sqrlen + 1))
-# define _PADX WIN_X / 4 + mlx->pad_x
-# define _PADY mlx->pad_y
+# define WIN_X mlx->win.win_x
+# define WIN_Y mlx->win.win_y
+# define _ADJUST(x) ((x) * (mlx->SQRLEN + 1))
+# define _PADX WIN_X / 4 + mlx->PAD_X
+# define _PADY mlx->PAD_Y
 # define _MLX mlx->mlx
 # define _WIN mlx->win_ptr
 # define _P1C 0x2e99e3
@@ -38,20 +38,20 @@ typedef struct		s_mlx
 	int				p2score;
 	struct			s_sqr
 	{
-		int			__bppx;
-		int			__sl;
-		int			__endian;
-		int			__sqrlen;
-	}				__sqr;
+		int			bppx;
+		int			sl;
+		int			endian;
+		int			sqrlen;
+	}				sqr;
 	struct			s_window
 	{
-		short		__win_x;
-		short		__win_y;
-		uint8_t		__map_x;
-		uint8_t		__map_y;
-		uint8_t		__pad_x;
-		uint8_t		__pad_y;
-	}				__win;
+		short		win_x;
+		short		win_y;
+		uint8_t		map_x;
+		uint8_t		map_y;
+		uint8_t		pad_x;
+		uint8_t		pad_y;
+	}				win;
 	void			*bclean;
 	void			*bg;
 	void			*bplay;
@@ -66,16 +66,14 @@ typedef struct		s_mlx
 	void			**font;
 }					t_mlx;
 
-#define bppx __sqr.__bppx
-#define endian __sqr.__endian
-#define sl __sqr.__sl
-#define sqrlen __sqr.__sqrlen
-#define win_x __win.__win_x
-#define win_y __win.__win_y
-#define map_x __win.__map_x
-#define map_y __win.__map_y
-#define pad_x __win.__pad_x
-#define pad_y __win.__pad_y
+# define BPPX sqr.bppx
+# define ENDIAN sqr.endian
+# define SL sqr.sl
+# define SQRLEN sqr.sqrlen
+# define MAP_X win.map_x
+# define MAP_Y win.map_y
+# define PAD_X win.pad_x
+# define PAD_Y win.pad_y
 
 int					color_squares(t_mlx *mlx);
 int					do_font(t_mlx *mlx);

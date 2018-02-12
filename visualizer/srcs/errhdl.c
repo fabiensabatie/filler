@@ -12,7 +12,7 @@
 
 #include "../includes/visualizer.h"
 
-_Noreturn void			errhdl(t_mlx *mlx, char *line)
+void	errhdl(t_mlx *mlx, char *line)
 {
 	ft_memdel((void **)&mlx);
 	ft_printf("%s\n", line);

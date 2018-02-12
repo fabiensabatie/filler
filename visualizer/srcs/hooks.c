@@ -6,7 +6,7 @@
 /*   By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:15:39 by nfinkel           #+#    #+#             */
-/*   Updated: 2018/02/08 16:12:00 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:12:00 by nfinkel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int							hook_key(int key, t_mlx *mlx)
 	{
 		mlx_put_image_to_window(_MLX, _WIN, mlx->bclean, WIN_X / 2 - 50,\
 			WIN_X / 2 + 5);
-		mlx_put_image_to_window(_MLX, _WIN, mlx->play ? _PAUSE: _PLAY, 0, 0);
+		mlx_put_image_to_window(_MLX, _WIN, mlx->play ? _PAUSE : _PLAY, 0, 0);
 		mlx->play = (mlx->play == false ? true : false);
 	}
 	KTHXBYE;
@@ -39,7 +39,7 @@ static inline void			do_grid(t_mlx *mlx, const int y)
 	int		k;
 
 	k = -1;
-	while (++k < mlx->map_x)
+	while (++k < mlx->MAP_X)
 		mlx_put_image_to_window(_MLX, _WIN, mlx->bsqr, _PADX + _ADJUST(k),\
 			_PADY + _ADJUST(y));
 }
@@ -68,9 +68,9 @@ int							hook_loop(t_mlx *mlx)
 	int				ret;
 	static int		y = 0;
 
-	if (mlx->mouse && y < mlx->map_y)
+	if (mlx->mouse && y < mlx->MAP_Y)
 		do_grid(mlx, y++);
-	else if (y == mlx->map_y && ++y && init_map(mlx) == -1)
+	else if (y == mlx->MAP_Y && ++y && init_map(mlx) == -1)
 		ft_fatal("allocation failed");
 	else if (!end && mlx->mouse && mlx->play)
 	{
@@ -91,10 +91,10 @@ int							hook_mouse(int button, int x, int y, t_mlx *mlx)
 	(void)button;
 	if (!mlx->mouse)
 		if ((WIN_X == 1920 && x >= 770 && x <= 1130 && y >= 140 && y <= 510)
-			|| (WIN_X == 1200 && x >= 485 && x <= 710 && y >= 90 && y <= 315))
-	{
-		mlx_put_image_to_window(_MLX, _WIN, mlx->bg, WIN_X / 4, 0);
-		mlx->mouse = true;
-	}
+		|| (WIN_X == 1200 && x >= 485 && x <= 710 && y >= 90 && y <= 315))
+		{
+			mlx_put_image_to_window(_MLX, _WIN, mlx->bg, WIN_X / 4, 0);
+			mlx->mouse = true;
+		}
 	KTHXBYE;
 }

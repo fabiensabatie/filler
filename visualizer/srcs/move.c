@@ -6,7 +6,7 @@
 /*   By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 17:34:00 by nfinkel           #+#    #+#             */
-/*   Updated: 2018/02/08 13:21:49 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:21:49 by nfinkel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ inline int					init_map(const t_mlx *mlx)
 	int			p;
 
 	k = -2;
-	while (++k < mlx->map_y)
+	while (++k < mlx->MAP_Y)
 	{
 		EPICFAILZ(get_next_line(STDIN_FILENO, &line), -1);
 		p = -1;
-		while (++p < mlx->map_x)
+		while (++p < mlx->MAP_X)
 			if (line[p + 4] == 'O' || line[p + 4] == 'X')
 				_DO_TILE((line[p + 4] == 'O' ? mlx->sqrp1 : mlx->sqrp2),\
 					_PADX + _ADJUST(p), _PADY + _ADJUST(k));
@@ -58,11 +58,11 @@ int							do_map(t_mlx *mlx, int *p1score, int *p2score)
 
 	k = -1;
 	score = false;
-	while (++k < mlx->map_y)
+	while (++k < mlx->MAP_Y)
 	{
 		EPICFAILZ(get_next_line(STDIN_FILENO, &line), -1);
 		p = -1;
-		while (++p < mlx->map_x)
+		while (++p < mlx->MAP_X)
 			if (line[p + 4] == 'o' || line[p + 4] == 'x')
 			{
 				_DO_TILE((line[p + 4] == 'o' ? mlx->sqrp1 : mlx->sqrp2),\

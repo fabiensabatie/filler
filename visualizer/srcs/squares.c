@@ -6,12 +6,12 @@
 /*   By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 18:49:45 by nfinkel           #+#    #+#             */
-/*   Updated: 2018/02/08 15:25:11 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:25:11 by nfinkel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/visualizer.h"
-#define _GET_ADDR(x) mlx_get_data_addr((x), &mlx->bppx, &mlx->sl, &mlx->endian)
+#define _GET_ADDR(x) mlx_get_data_addr((x), &mlx->BPPX, &mlx->SL, &mlx->ENDIAN)
 
 static inline void			big_endian(char **aptr, int color, const int x,
 							const int y)
@@ -49,21 +49,21 @@ static void					do_square(const t_mlx *mlx, char *ptr, int color)
 	int		p;
 	int		x;
 
-	x = mlx->sl / 4;
+	x = mlx->SL / 4;
 	k = -1;
-	while (++k < mlx->sqrlen)
+	while (++k < mlx->SQRLEN)
 	{
 		p = -1;
 		while (++p < x)
 		{
-			if (!p || !k || k == mlx->sqrlen - 1 || p == mlx->sl / 4 - 1)
+			if (!p || !k || k == mlx->SQRLEN - 1 || p == mlx->SL / 4 - 1)
 			{
-				if (mlx->endian)
+				if (mlx->ENDIAN)
 					big_endian(&ptr, 0x2c2c2c, 0, 0);
 				else
 					little_endian(&ptr, 0x2c2c2c, 0, 0);
 			}
-			else if (mlx->endian)
+			else if (mlx->ENDIAN)
 				big_endian(&ptr, color, p, k);
 			else
 				little_endian(&ptr, color, p, k);
@@ -89,7 +89,7 @@ static void					do_rectangle(const t_mlx *mlx, char *ptr,
 		p = -1;
 		while (++p < x)
 		{
-			if (mlx->endian)
+			if (mlx->ENDIAN)
 				big_endian(&ptr, color, 0, 0);
 			else
 				little_endian(&ptr, color, 0, 0);
@@ -100,11 +100,11 @@ static void					do_rectangle(const t_mlx *mlx, char *ptr,
 
 int							color_squares(t_mlx *mlx)
 {
-	FAILZ(mlx->bsqr = mlx_new_image(_MLX, mlx->sqrlen, mlx->sqrlen), -1);
+	FAILZ(mlx->bsqr = mlx_new_image(_MLX, mlx->SQRLEN, mlx->SQRLEN), -1);
 	do_square(mlx, _GET_ADDR(mlx->bsqr), 0x2c2c2c);
-	FAILZ(mlx->sqrp1 = mlx_new_image(_MLX, mlx->sqrlen, mlx->sqrlen), -1);
+	FAILZ(mlx->sqrp1 = mlx_new_image(_MLX, mlx->SQRLEN, mlx->SQRLEN), -1);
 	do_square(mlx, _GET_ADDR(mlx->sqrp1), _P1C);
-	FAILZ(mlx->sqrp2 = mlx_new_image(_MLX, mlx->sqrlen, mlx->sqrlen), -1);
+	FAILZ(mlx->sqrp2 = mlx_new_image(_MLX, mlx->SQRLEN, mlx->SQRLEN), -1);
 	do_square(mlx, _GET_ADDR(mlx->sqrp2), _P2C);
 	FAILZ(mlx->bg = mlx_new_image(_MLX, WIN_X / 2, WIN_X / 2), -1);
 	do_rectangle(mlx, _GET_ADDR(mlx->bg), WIN_X / 2, WIN_X / 2);

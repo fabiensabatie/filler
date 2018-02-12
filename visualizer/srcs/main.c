@@ -6,7 +6,7 @@
 /*   By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 15:29:27 by nfinkel           #+#    #+#             */
-/*   Updated: 2018/02/08 15:16:38 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:16:38 by nfinkel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static t_mlx				*output_grid(t_mlx *mlx)
 	if (!mlx)
 		ZOMG;
 	EPICFAILZ(get_next_line(STDIN_FILENO, &line), NULL);
-	mlx->map_y = ft_atoi(line + 8);
-	mlx->map_x = ft_atoi(line + ft_intlen(mlx->map_y) + 9);
-	if (mlx->map_x > 100 || mlx->map_y > 100)
+	mlx->MAP_Y = ft_atoi(line + 8);
+	mlx->MAP_X = ft_atoi(line + ft_intlen(mlx->MAP_Y) + 9);
+	if (mlx->MAP_X > 100 || mlx->MAP_Y > 100)
 		ft_fatal("map size isn't supported by visualizer");
 	ft_strdel(&line);
-	nb = MAX(mlx->map_x, mlx->map_y);
+	nb = MAX(mlx->MAP_X, mlx->MAP_Y);
 	width = WIN_X / 2;
-	mlx->sqrlen = (width - (nb - 1)) / nb;
-	mlx->pad_x = (width - ((mlx->map_x * mlx->sqrlen) + mlx->map_x - 1)) / 2;
-	mlx->pad_y = (width - ((mlx->map_y * mlx->sqrlen) + mlx->map_y - 1)) / 2;
+	mlx->SQRLEN = (width - (nb - 1)) / nb;
+	mlx->PAD_X = (width - ((mlx->MAP_X * mlx->SQRLEN) + mlx->MAP_X - 1)) / 2;
+	mlx->PAD_Y = (width - ((mlx->MAP_Y * mlx->SQRLEN) + mlx->MAP_Y - 1)) / 2;
 	EPICFAILZ(color_squares(mlx), NULL);
 	GIMME(mlx);
 }
@@ -123,8 +123,9 @@ int							main(int argc, const char *argv[])
 	else
 		x = 1920;
 	y = (x == 1920 ? 1080 : 675);
-	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx))) || !(_MLX = mlx_init())
-		|| (!(_WIN = mlx_new_window(_MLX, x, y, _TITLE))))
+	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx)))
+	|| !(_MLX = mlx_init())
+	|| (!(_WIN = mlx_new_window(_MLX, x, y, _TITLE))))
 		ft_fatal("allocation failed");
 	display_board(mlx, x, y);
 	mlx_put_image_to_window(_MLX, _WIN, mlx->bpause, 0, 0);
