@@ -133,11 +133,14 @@ $(NAME):
 	@gcc $(CPPFLAGS) -o $(NAME) $(FILL_OBJ) $(LIB_NAME)
 	@mv $(NAME) players/
 	@rm -rf $(LIB_NAME)
+	@make -C ./visualizer/
 
 clean:
 	@rm -rf $(OBJ_PATH)
+	@cd visualizer && make clean
 
 fclean: clean
 	@rm -rf players/$(NAME)
+	@cd visualizer && make fclean
 
 re: fclean all
