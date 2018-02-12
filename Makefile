@@ -22,7 +22,6 @@ OBJ_PATH = obj
 
 FILL_SRC =	filler.c \
 			play.c \
-			params.c \
 			map.c \
 			piece.c
 

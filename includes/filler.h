@@ -42,7 +42,6 @@ typedef struct	s_map
 	char		**grid;
 }				t_map;
 
-
 typedef struct	s_piece
 {
 	size_t		size_x;
@@ -56,10 +55,6 @@ typedef struct	s_piece
 typedef struct	s_opponent
 {
 	char		mark;
-	size_t		op_last_x;
-	size_t		op_last_y;
-	size_t		center_x;
-	size_t		center_y;
 }				t_op;
 
 typedef struct	s_champ
@@ -67,8 +62,6 @@ typedef struct	s_champ
 	t_player	player;
 	char		mark;
 	float		aim[3][2];
-	float		center_x;
-	float		center_y;
 }				t_champ;
 
 typedef struct	s_filler
@@ -77,7 +70,6 @@ typedef struct	s_filler
 	t_op		*op;
 	t_piece		*p;
 	t_map		*map;
-	t_map		*pr_map;
 	size_t		round;
 	size_t		i;
 	int			fits[1000000][2];
@@ -85,10 +77,10 @@ typedef struct	s_filler
 	int			by;
 }				t_filler;
 
-void	set_env(t_filler *f);
-void	get_map(t_filler *f);
-void	get_piece(t_filler *f);
-int		play(t_filler *f);
-int		find_fit(t_filler *f);
+void			set_env(t_filler *f);
+void			get_map(t_filler *f);
+void			get_piece(t_filler *f);
+int				find_fit(t_filler *f);
+int				p_fits(t_filler *f, int x, int y);
 
 #endif

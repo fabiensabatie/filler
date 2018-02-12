@@ -12,7 +12,7 @@
 
 #include "../includes/filler.h"
 
-static int	p_fits(t_filler *f, int x, int y)
+int					p_fits(t_filler *f, int x, int y)
 {
 	t_equa coor;
 	size_t stars;
@@ -41,68 +41,25 @@ static int	p_fits(t_filler *f, int x, int y)
 	return (f->i);
 }
 
-int			f_bfit(t_filler *f, int pos)
+static inline void	free_p(t_filler *f)
 {
-	int y;
-	int x;
-	int pow;
+	size_t i;
 
-	y = 0;
-	f->bx = 0;
-	f->by = 0;
-	pow = POW2(FMY) + POW2(FMX);
-	while (++y <= (int)FMY)
-	{
-		x = 0;
-		f->i = 0;
-		while (++x <= (int)FMX)
-			if (FMG[y][x] == '*')
-				while (f->i < (size_t)pos)
-				{
-					if (POW2(y - (int)f->fits[f->i][0]) + POW2(x - (int)f->fits[f->i][1]) < (int)pow)
-					{
-						pow = POW2(y - (int)f->fits[f->i][0]) + POW2(x - (int)f->fits[f->i][1]);
-						f->bx = f->fits[f->i][1];
-						f->by = f->fits[f->i][0];
-					}
-					f->i++;
-				}
-	}
-	if (f->bx && f->by)
-		return (ft_printf("%d %d\n", f->by - (int)FPDY - 1, f->bx - (int)FPDX - 1));
-	return (0);
+	i = 0;
+	while (i < FPY)
+		free(FPS[i++]);
+	free(FPS);
 }
 
-int			find_fit(t_filler *f)
-{
-	int y;
-	int x;
-	int pos;
-
-	y = 0;
-	pos = 0;
-	while (++y <= (int)FMY)
-	{
-		x = 0;
-		while (++x <= (int)FMX)
-			if (p_fits(f, x, y))
-			{
-				f->fits[pos][0] = y;
-				f->fits[pos++][1] = x;
-			}
-	}
-	if (pos)
-		return f_bfit(f, pos);
-	return (0);
-}
-
-void		init_p(t_filler *f)
+void				init_p(t_filler *f)
 {
 	char	*line;
 	char	*s;
 	size_t	i;
 
 	i = 0;
+	if (f->round)
+		free_p(f);
 	get_next_line(0, &line);
 	s = line;
 	FPY = ft_atoi(ft_strstr(line, " "));
@@ -116,7 +73,7 @@ void		init_p(t_filler *f)
 		P_ALLOC(FPS[i++], char*, (FPX + 1));
 }
 
-void		get_piece(t_filler *f)
+void				get_piece(t_filler *f)
 {
 	char	*line;
 	size_t	i;

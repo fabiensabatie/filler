@@ -46,7 +46,7 @@ int			main(void)
 	{
 		get_map(&f);
 		get_piece(&f);
-		if (!play(&f) && ft_printf("0 0\n"))
+		if (!find_fit(&f) && ft_printf("0 0\n"))
 			break ;
 		f.round++;
 	}

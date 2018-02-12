@@ -16,7 +16,7 @@ t_vec	*ft_vecnew(float x, float y)
 {
 	t_vec *vec;
 
-	P_ALLOC(vec, t_vec*, sizeof(vec))
+	P_ALLOC(vec, t_vec*, sizeof(vec));
 	vec->x = x;
 	vec->y = y;
 	return (vec);
@@ -26,7 +26,7 @@ t_vec	*ft_getmidcoor(t_vec *a, t_vec *b)
 {
 	t_vec *mid;
 
-	P_ALLOC(mid, t_vec*, sizeof(mid))
+	P_ALLOC(mid, t_vec*, sizeof(mid));
 	mid->x = (b->x + a->x) / 2;
 	mid->y = (b->y + a->y) / 2;
 	return (mid);
@@ -36,7 +36,7 @@ t_vec	*ft_get_perpendicular_vec(t_vec *a, t_bool way)
 {
 	t_vec *mid;
 
-	P_ALLOC(mid, t_vec*, sizeof(mid))
+	P_ALLOC(mid, t_vec*, sizeof(mid));
 	if (way)
 	{
 		mid->x = a->y;
