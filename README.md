@@ -29,15 +29,13 @@ A visualizer made with the minilibx (a graphical library made for our graphical 
 ## Running
 
 Standard mode : 
-
 `./filler_vm -f [map] -p1 [player1] -p2 [player2]`
 
 Visualizer mode :
-
 `./filler_vm -f [map] -p1 [player1] -p2 [player2] | ./visualizer/visualizer`
 
 Example from the root folder : 
-`./filler_vm -f ./maps/map03 -p1 ./fsabatie.filler -p2 ./players/carli.filler | ./visualizer/visualizer`
+`./filler_vm -f ./maps/map03 -p1 players/fsabatie.filler -p2 players/carli.filler | ./visualizer/visualizer`
 
 ## Final Mark
 
