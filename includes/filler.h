@@ -6,13 +6,13 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/04 16:07:50 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/02/16 11:10:14 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # define MARK 0
 # define L_MARK 1
 # define FMX f->map->size_x
