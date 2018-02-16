@@ -13,11 +13,8 @@ A virtual machine organizes the game :
 
 Every turn, the current player have to put his piece on the map, if he cannot place a piece, then he won't have the ability to play for the remainder of the match.
 To put a piece, the player have to write its coordinates on the standard input. 
-
 The game appears on the standard input. 
-
 The aim of the game is to put more pieces on the map than the ennemy. 
-
 Refer to the [project instructions][2] for more details.
 
 ## Bonus
@@ -44,7 +41,7 @@ Example from the root folder :
 
 ## Final Mark
 
-`Got 125 / 125`
+Got 125 / 125
 
 [1]: http://42.fr "42 Paris"
 [2]: https://github.com/jon-finkel/filler/blob/master/project_instructions/filler.en.pdf "filler"
