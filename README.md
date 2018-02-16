@@ -23,7 +23,7 @@ Refer to the [project instructions][2] for more details.
 ## Bonus
 
 Reading the game on the terminal isn't very user-friendly.
-A visualizer made with the minilibx (a graphical library made for our graphical projects at 42) makes the game much more intuitive to follow. It is the combined efforts of [fsabatie][3] and I.
+A visualizer made with the minilibx (a graphical library made for our graphical projects at 42) makes the game much more intuitive to follow. It is the combined efforts of [nfinkel][3] and I. (This readme isn't though, I just nicely duplicated it from his own git) :)
 
 ## Installation
 
@@ -40,12 +40,12 @@ Visualizer mode :
 `./filler_vm -f [map] -p1 [player1] -p2 [player2] | ./visualizer/visualizer`
 
 Example from the root folder : 
-`./filler_vm -f ./maps/map03 -p1 ./nfinkel.filler -p2 ./players/carli.filler | ./visualizer/visualizer`
+`./filler_vm -f ./maps/map03 -p1 ./fsabatie.filler -p2 ./players/carli.filler | ./visualizer/visualizer`
 
 ## Final Mark
 
-`No grade yet`
+`Got 125 / 125`
 
 [1]: http://42.fr "42 Paris"
 [2]: https://github.com/jon-finkel/filler/blob/master/project_instructions/filler.en.pdf "filler"
-[3]: https://github.com/fabiensabatie "this guy"
+[3]: https://github.com/jon-finkel "this dude"
